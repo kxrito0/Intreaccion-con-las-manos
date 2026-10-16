@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pinch to Size — Hand Tracking Ball</title>
+
+    <!--
+      Pinned CDN versions. Note the p5.js global build lives at `lib/`, not
+      `dist/`, for the 2.x line.
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.4/lib/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ml5@1.4.0/dist/ml5.min.js"></script>
+
+    <style>
+      :root {
+        --bg: #0d1017;
+        --panel: #151a24;
+        --text: #e6ecf5;
+        --muted: #8c9bb3;
+        --accent: #5ac8ff;
+        --danger: #ff6b81;
+        --warn: #ffc861;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", Menlo, Consolas, monospace;
+      }
+
+      main {
+        width: min(680px, 100%);
+      }
+
+      h1 {
+        margin: 0 0 4px;
+        font-size: 20px;
+        letter-spacing: 0.02em;
+      }
+
+      .subtitle {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      #stage {
+        position: relative;
+        border: 1px solid #253044;
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--panel);
+        line-height: 0;
+      }
+
+      #canvas-holder canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      #status {
+        position: absolute;
+        left: 12px;
+        bottom: 12px;
+        margin: 0;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(6, 9, 14, 0.82);
+        border: 1px solid #2b3648;
+        color: var(--accent);
+        font-size: 12px;
+        line-height: 1.4;
+        max-width: calc(100% - 24px);
+      }
+
+      #status[data-variant="error"] {
+        color: var(--danger);
+        border-color: #563040;
+      }
+
+      #status[data-variant="warn"] {
+        color: var(--warn);
+        border-color: #574a2c;
+      }
+
+      .hint {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 12.5px;
+        line-height: 1.7;
+      }
+
+      kbd {
+        padding: 1px 6px;
+        border: 1px solid #35415a;
+        border-bottom-width: 2px;
+        border-radius: 5px;
+        background: #1b2231;
+        color: var(--text);
+        font-size: 11px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <h1>Pinch to Size</h1>
+      <p class="subtitle">p5.js 2.3.4 + ml5.js 1.4.0 · hand tracking via webcam</p>
+
+      <div id="stage">
+        <div id="canvas-holder"></div>
+        <p id="status" role="status" aria-live="polite">Starting…</p>
+      </div>
+
+      <p class="hint">
+        Pinch your thumb and index finger together to shrink the ball; open your hand to grow it.
+        Press <kbd>d</kbd> to toggle the debug overlay and read the live ratio.
+      </p>
+    </main>
+
+    <script type="module" src="sketch.js"></script>
+  </body>
+</html>

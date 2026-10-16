@@ -1,0 +1,14 @@
+{
+  "name": "hand-pinch-ball",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Webcam hand tracking: pinch gesture between thumb and index controls the size of a ball. p5.js + ml5.js, no build step.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
